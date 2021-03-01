@@ -61,7 +61,7 @@ public class UserControllerTest {
 
     //Test /users (GET)
     @Test
-    public void get_01() throws Exception {
+    public void getMultipleUsersWithDifferentIDValuesAndAssertIDValuesExists() throws Exception {
         List<User> userList = Arrays.asList(
                 new User(1,"Burakhan Aksoy",
                         "burak@burak.com","Male",
@@ -87,12 +87,15 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.[0]",hasKey("id")))
                 .andExpect(jsonPath("$.[0]",hasKey("name")))
                  .andExpect(jsonPath("$.[0]",hasKey("email")))
-                .andExpect(jsonPath("$.[0]",hasKey("phoneNumber")));
+                .andExpect(jsonPath("$.[0]",hasKey("phoneNumber")))
+                .andExpect(jsonPath("$.[1]",hasKey("id")))
+                 .andExpect(jsonPath("$.[2]",hasKey("id")))
+                 .andExpect(jsonPath("$.[3]",hasKey("id")));
     }
 
     //Test /users (POST)
     @Test
-    public void post_01() throws Exception {
+    public void postUserThenValidateUserAddedSuccessfully() throws Exception {
         User user1 =new User(1,"Burakhan Aksoy",
                 "burak@burak.com","Male",
                 "12321");
